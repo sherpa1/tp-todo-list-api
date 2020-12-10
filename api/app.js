@@ -1,2 +1,11 @@
-console.log("Hello, World!");
-console.log("Check Nodemon !");
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+})
+
+app.listen(port, () => {
+  console.log(`TP Todo List API listening at http://localhost:${port}`);
+})
