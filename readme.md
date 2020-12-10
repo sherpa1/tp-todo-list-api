@@ -8,7 +8,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 git checkout tp03
 ```
 
-- initialisation d'un projet Express.js
+- initialisation d'un projet Express.js basique
 
 ### Commandes
 
