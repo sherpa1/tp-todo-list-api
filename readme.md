@@ -2,13 +2,13 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP3 : Express.js
+## TP4 : Express.js
 
 ```
-git checkout tp03
+git checkout tp04
 ```
 
-- initialisation d'un projet Express.js basique
+- organisation des Routes dans des fichiers distincts
 
 ### Commandes
 
