@@ -8,8 +8,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 git checkout tp03
 ```
 
-- utilisation de Docker Compose
-- installation du module npm Nodemon directement depuis le container
+- initialisation d'un projet Express.js
 
 ### Commandes
 
