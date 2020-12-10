@@ -2,25 +2,39 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP1 : Hello, World !
+## TP2 : Docker Compose + Nodemon
 
 ```
-git checkout tp1
+git checkout tp2
 ```
 
-- création du projet Node.js
-- vérification du fonctionnement du message de log dans le terminal
+- utilisation de Docker Compose
+- installation du module npm Nodemon directement depuis le container
 
 ### Commandes
 
-Se placer à la racine du dossier api
+- Se placer à la racine du projet
 
 ```
-cd ./api
+docker-compose up
 ```
 
+- Installation d'un module NPM de façon globale directement dans le container
+
 ```
-npm start
+docker run tp.todolist.api npm i express
+```
+
+- Installation d'un module NPM de façon globale directement dans le container
+
+```
+docker run tp.todolist.api npm i nodemon -g
+```
+
+- En cas de problèmes de droits d'écritures dans les volumes :
+
+```
+sudo chown "$USER":"$USER" . -R
 ```
 
 ## Crédits

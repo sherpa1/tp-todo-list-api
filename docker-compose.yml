@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  tp.todolist.api:
+    container_name: tp.todolist.api
+    image: node
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/usr/src/api
+    working_dir: /usr/src/api
+    command: npm run dev
