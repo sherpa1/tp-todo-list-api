@@ -1,0 +1,12 @@
+api/node_modules/
+api/*.log
+api/npm-debug.log*
+api/.npm
+api/.eslintcache
+api/logs
+api/yarn-debug.log*
+api/yarn-error.log*
+api/.env
+api/.env.dev
+api/.env.prod
+api/.cache

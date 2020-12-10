@@ -1,0 +1,20 @@
+{
+  "name": "tp-todo-list-api",
+  "version": "1.0.0",
+  "description": "Enseignement du développement d'API avec Node.js et Docker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sherpa1/tp-todo-list-api.git"
+  },
+  "author": "Alexandre Leroux <alex@sherpa.one> (https://sherpa.one)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/sherpa1/tp-todo-list-api/issues"
+  },
+  "homepage": "https://github.com/sherpa1/tp-todo-list-api#readme"
+}
