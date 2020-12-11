@@ -1,4 +1,5 @@
 const express = require("express");
+const { nextTick } = require("process");
 const router = express.Router();
 
 let todos = [
@@ -66,6 +67,7 @@ router.get("/:id", (req,res)=>{
 
     try {
         [a_todo] = todos.filter(todo=>todo.id==id);
+        if(a_todo===undefined) next(404);
         res.json(a_todo);
     } catch (error) {
         res.json({message:"No matching todo"});
