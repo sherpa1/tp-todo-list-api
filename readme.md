@@ -6,11 +6,11 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 
 Chaque étape de TP correspond à une branche git (TP01 = tp01, TP02 = tp02...).
 
-- TP01 : Création d'un projet Node.js
-- TP02 : 
-- TP03 : 
-- TP04 : 
-- TP05 : 
+- TP01 : Hello, World!
+- TP02 : Docker Compose + Nodemon
+- TP03 : Express.js
+- TP04 : CRUD Routes
+- TP05 : Middlewares
 
 ## Crédits
 
