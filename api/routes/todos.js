@@ -1,226 +1,82 @@
 const express = require("express");
 const router = express.Router();
-const validator = require('validator');
 
-let todo;
+const todos = require("../data/todos");
 
-const todo_validator = (req, res, next) => {
+const validate_the_todo = require("../middlewares/todo/validate_the_todo");
+const find_the_todo = require("../middlewares/todo/find_the_todo");
 
-    Date.prototype.yyyymmdd = function () {
-        const mm = this.getMonth() + 1; // getMonth() is zero-based
-        const dd = this.getDate();
+const hateoas = require("../utils/hateoas");
 
-        return [this.getFullYear(),
-        (mm > 9 ? '' : '0') + mm,
-        (dd > 9 ? '' : '0') + dd
-        ].join('-');
-    };
+router.use(validate_the_todo);
 
-    if (req.method === "POST" || req.method === "PUT") {
-        todo = req.body;
-
-        if (req.method === "POST") {
-            if (todo.id != undefined) delete (todo.id);
-            if (todo.created_at != undefined) delete (todo.created_at);
-            todo.done = false;
-        }
-
-        if (validator.isEmpty(todo.title)) {
-            next({ status: 400, message: `todo title should not be empty` });
-        }
-
-        if (todo.deadline) {
-            if (!validator.isAfter(todo.deadline)) {
-                const date = new Date();
-                next({ status: 400, message: `todo deadline should be after ${date.yyyymmdd()}, ${todo.deadline} given` });
-            }
-        }
-
-        if (!todo.user_id > 0) {
-            next({ status: 400, message: `todo user_id should not be empty` });
-        }
-
-        if (todo.id < 1) {
-            next({ status: 400, message: `todo id should be greater than 0` });
-        }
-
-    }
-
-    next();
-
-}
-
-router.use(todo_validator);
-
-let todos = [
-    {
-        id: 1,
-        title: "Lorem ipsum dolor sit amet",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        done: false,
-        deadline: null,
-        created_at: "2020-12-10 23:00:00",
-        updated_at: null,
-        user_id: 1
-    },
-    {
-        id: 2,
-        title: "Consectetur adipiscing elit",
-        content: "Maecenas tincidunt consequat commodo. Proin quam ante, venenatis ac eros et, scelerisque luctus odio.",
-        done: false,
-        deadline: null,
-        created_at: "2020-12-10 23:10:00",
-        updated_at: null,
-        user_id: 1
-    },
-    {
-        id: 3,
-        title: "Nullam ullamcorper a mauris sit amet mattis. ",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        done: false,
-        deadline: null,
-        created_at: "2020-12-10 23:20:00",
-        updated_at: null,
-        user_id: 1
-    },
-    {
-        id: 4,
-        title: "Vestibulum magna elit, rhoncus eu sapien ut",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        done: false,
-        deadline: "2020-12-11 09:10:00",
-        created_at: "2020-12-10 23:30:00",
-        updated_at: "2002-12-11 07:00:00",
-        user_id: 1
-    },
-    {
-        id: 5,
-        title: "Faucibus accumsan magna.",
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        done: true,
-        deadline: null,
-        created_at: "2020-12-10 23:40:00",
-        updated_at: null,
-        user_id: 1
-    },
-];
-
-let a_todo;
-
-router.get("/", (req, res) => {
+router.get("/", (req, res,next) => {
 
     res.status(200).json(
         {
             data: todos,
-            links: [
-                {
-                    rel: 'self',
-                    href: req.originalUrl,
-                    type: "GET"
-                },
-            ]
+            links: hateoas(req,list=true)
         });
 });
 
-router.get("/:id", (req, res) => {
-
-    const { id } = req.params;
-
-    try {
-        [a_todo] = todos.filter(todo => todo.id == id);
-
-        if(a_todo==undefined)
-        next({ status: 404, message: `Todo with id ${id} does not exist` });
-    
-    } catch (error) {
-        next({ status: 404, message: `Todo with id ${id} does not exist` })
-    }
+router.get("/:id", find_the_todo, (req, res,next) => {
 
     res.status(200).json(
         {
-            data: a_todo,
-            links: [
-                {
-                    rel: 'self',
-                    href: req.originalUrl,
-                    type: "GET"
-                },
-                {
-                    rel: 'list',
-                    href: req.baseUrl,
-                    type: 'GET'
-                }
-            ]
+            data: res.the_todo,
+            links: hateoas(req,self=true,list=true)
         });
 
 });
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", find_the_todo, (req, res, next) => {
 
-    const { id } = req.params;
-
-    try {
-        [a_todo] = todos.filter(todo => todo.id == id);
-        
-        if(a_todo==undefined)
-        next({ status: 404, message: `Todo with id ${id} does not exist` });
-
-        a_todo.title = "Updated todo";
-
-
-    } catch (error) {
-        next({ status: 404, message: `Todo with id ${id} does not exist` })
-    }
+    res.the_todo.title = "Updated todo title";
+    res.the_todo.content= "Updated todo content";
 
     res.status(200).json(
         {
-            data: a_todo,
-            links: [
-                {
-                    rel: 'self',
-                    href: req.originalUrl,
-                    type: "GET"
-                },
-                {
-                    rel: 'list',
-                    href: req.baseUrl,
-                    type: 'GET'
-                }
-            ]
+            data: res.the_todo,
+            links: hateoas(req,self=true,list=true)
         }
     );
 
 });
 
 router.post("/", (req, res, next) => {
-    todos.push(todo);
-    res.json(todo);
+    todos.push(res.the_todo);
+
+    const new_id = 6;
+
+    const new_url = `${req.originalUrl}/${new_id}`;
+
+    res.status(201).json({data:res.the_todo,links:hateoas(req,list=true, self=true,url=new_url)});
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", find_the_todo, (req, res, next) => {
 
-    const { id } = req.params;
-
-    try {
-        [a_todo] = todos.filter(todo => todo.id == id);
-
-        if(a_todo==undefined)
-        next({ status: 404, message: `Todo with id ${id} does not exist` });
-
-    } catch (error) {
-        next({ status: 404, message: `Todo with id ${id} does not exist` });
-    }
+    if(res.the_todo==undefined)
+    return next({status:404,message:`Todo with id ${req.params.id} does not exist`});
 
     let the_index;
 
+    try {        
+        todos.forEach((todo, index) => {
+            if (todo.id === res.the_todo.id) the_index = index;
+        });
 
-    todos.forEach((todo, index) => {
-        if (todo.id === a_todo.id) the_index = index;
-    });
+        if(the_index==undefined) next({ status: 404, message: `Todo with id ${id} does not exist` });
+    } catch (error) {
+        next({ status: 404, message: `Todo with id ${req.params.id} does not exist` });
+    }
 
-    todos.pop(the_index);
+    try {
+        todos.pop(the_index);
+    } catch (error) {
+        next({ status: 404, message: `Todo with id ${req.params.id} does not exist` });
+    }
 
-    res.status(204);
+    res.sendStatus(204);
 
 });
 
