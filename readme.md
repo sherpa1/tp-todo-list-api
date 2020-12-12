@@ -7,7 +7,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 ```
 git checkout tp07
 ```
-
+- gestion des statuts des réponses http
 - autodocumentation avec Hateoas
 
 ### Commandes
