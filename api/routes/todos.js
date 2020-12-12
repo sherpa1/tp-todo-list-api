@@ -118,7 +118,10 @@ router.get("/:id", (req,res)=>{
 
     try {
         [a_todo] = todos.filter(todo=>todo.id==id);
-        if(a_todo===undefined) next(404);
+
+        if(a_todo==undefined)
+        return next({ status: 404, message: `Todo with id ${id} does not exist` });
+
         res.json(a_todo);
     } catch (error) {
         res.json({message:"No matching todo"});
@@ -131,7 +134,11 @@ router.put("/:id", (req,res,next)=>{
     const {id} = req.params;
 
     try {
-        a_todo = todos.filter(todo=>todo.id==id);
+        [a_todo] = todos.filter(todo=>todo.id==id);
+        
+        if(a_todo==undefined)
+        return next({ status: 404, message: `Todo with id ${id} does not exist` });
+        
         a_todo.title = "Updated todo";
         res.json(a_todo);
     } catch (error) {
@@ -145,12 +152,16 @@ router.post("/", (req,res,next)=>{
     res.json(todo);
 });
 
-router.delete("/:id",(req,res)=>{
+router.delete("/:id",(req,res,next)=>{
 
     const {id} = req.params;
 
     try {
-        [a_todo] = todos.filter(todo=>todo.id===Number(id));
+        [a_todo] = todos.filter(todo=>todo.id==id);
+
+        if(a_todo==undefined)
+        return next({ status: 404, message: `Todo with id ${id} does not exist` });
+    
     } catch (error) {
         res.json({message:"No matching todo"});
     }
