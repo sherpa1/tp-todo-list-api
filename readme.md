@@ -2,13 +2,17 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP05 : Middlewares
+## TP06 : Inputs
 
 ```
-git checkout tp05
+git checkout tp06
 ```
 
-- implémentation des actions CRUD sur la ressource Todo
+- contrôle des données entrantes (inputs)
+- installation du module NPM Validator (https://github.com/validatorjs/validator.js)
+- installation du module NPM body-parser (https://github.com/expressjs/body-parser)
+- utilisation d'un middleware pour valider les données entrantes des requêtes PUT et POST
+
 
 ### Commandes
 
@@ -35,7 +39,7 @@ docker-compose run tp.todolist.api npm i express
 - Installation d'un module NPM de façon globale directement dans le container
 
 ```
-docker-composel run tp.todolist.api npm i nodemon -g
+docker-compose run tp.todolist.api npm i nodemon -g
 ```
 
 - En cas de problèmes de droits d'écritures dans les volumes :

@@ -1,7 +1,12 @@
 const error_handler = (err,req,res,next)=>{
-    console.error(err)
-    if(err) return res.status(err.code).json({message:"error"});
-    else next();
+
+    let {status,message} = err;
+    
+    if(status==undefined) status = 400;
+    if(message==undefined) message = "";
+
+    res.status(status).json({status,message});
+
 }
 
 module.exports = error_handler;

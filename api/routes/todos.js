@@ -1,5 +1,57 @@
 const express = require("express");
 const router = express.Router();
+const validator = require('validator');
+
+let todo;
+
+const todo_validator = (req,res,next)=>{
+
+    Date.prototype.yyyymmdd = function () {
+        const mm = this.getMonth() + 1; // getMonth() is zero-based
+        const dd = this.getDate();
+    
+        return [this.getFullYear(),
+        (mm > 9 ? '' : '0') + mm,
+        (dd > 9 ? '' : '0') + dd
+        ].join('-');
+    };
+
+    if(req.method==="POST"||req.method==="PUT"){
+        todo = req.body;
+
+        if(req.method==="POST"){
+            if(todo.id!=undefined) delete(todo.id);
+            if(todo.created_at!=undefined) delete(todo.created_at);
+            todo.done = false;
+        }
+
+        if(validator.isEmpty(todo.title)){
+            next({status:400,message:`todo title should not be empty`});
+        }
+        
+        if(todo.deadline){
+            if(!validator.isAfter(todo.deadline)){
+                const date = new Date();
+                next({status:400,message:`todo deadline should be after ${date.yyyymmdd()}, ${todo.deadline} given`});
+            }
+        }
+        
+        if(!todo.user_id>0){
+            next({status:400,message:`todo user_id should not be empty`});
+        }
+  
+        if(todo.id<1){
+            next({status:400,message:`todo id should be greater than 0`});
+        }
+
+    }
+
+    next();
+
+}
+
+router.use(todo_validator);
+
 
 let todos = [
     {
@@ -74,7 +126,7 @@ router.get("/:id", (req,res)=>{
 
 });
 
-router.put("/:id", (req,res)=>{
+router.put("/:id", (req,res,next,todo)=>{
 
     const {id} = req.params;
 
@@ -88,20 +140,9 @@ router.put("/:id", (req,res)=>{
 
 });
 
-router.post("/", (req,res)=>{
-    todos.push(
-        {
-            id:6,
-            title:"Faucibus accumsan magna.",
-            content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            done:true,
-            deadline:null,
-            created_at:"2020-12-10 23:40:00",
-            updated_at:null,
-            user_id:1
-        },
-    );
-    res.json(todos);
+router.post("/", (req,res,next)=>{
+    todos.push(todo);
+    res.json(todo);
 });
 
 router.delete("/:id",(req,res)=>{

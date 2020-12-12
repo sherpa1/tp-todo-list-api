@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+);
+
 const error_handler = require("./middlewares/error_handler");
 
 const logger = require("./middlewares/logger");
