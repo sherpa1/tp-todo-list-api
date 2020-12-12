@@ -52,7 +52,6 @@ const todo_validator = (req,res,next)=>{
 
 router.use(todo_validator);
 
-
 let todos = [
     {
         id:1,
@@ -109,7 +108,18 @@ let todos = [
 let a_todo;
 
 router.get("/", (req,res)=>{
-    res.json(todos);
+
+    res.status(200).location(`${req.path}`).json(
+        {
+            data:todos, 
+            links:[
+                {
+                    rel:'self',
+                    href:req.originalUrl,
+                    type:"GET"
+                },
+            ]
+        });
 });
 
 router.get("/:id", (req,res)=>{
@@ -119,21 +129,52 @@ router.get("/:id", (req,res)=>{
     try {
         [a_todo] = todos.filter(todo=>todo.id==id);
         if(a_todo===undefined) next(404);
-        res.json(a_todo);
+        res.status(200).location(`${req.path}/${id}`).json(
+            {
+                data:a_todo, 
+                links:[
+                    {
+                        rel:'self',
+                        href:req.originalUrl,
+                        type:"GET"
+                    },
+                    {
+                        rel:'list',
+                        href:req.baseUrl,
+                        type:'GET'
+                    }
+                ]
+            });
     } catch (error) {
         res.json({message:"No matching todo"});
     }
 
 });
 
-router.put("/:id", (req,res,next,todo)=>{
+router.put("/:id", (req,res,next)=>{
 
     const {id} = req.params;
 
     try {
-        a_todo = todos.filter(todo=>todo.id==id);
+        a_todo = todos.filter(todo=>todo.id===id);
         a_todo.title = "Updated todo";
-        res.json(a_todo);
+        res.status(200).location(`${req.path}/${id}`).json(
+            {
+                data:a_todo, 
+                links:[
+                    {
+                        rel:'self',
+                        href:req.originalUrl,
+                        type:"GET"
+                    },
+                    {
+                        rel:'list',
+                        href:req.baseUrl,
+                        type:'GET'
+                    }
+                ]
+            }
+        );
     } catch (error) {
         res.json({message:"No matching todo"});
     }

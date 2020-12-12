@@ -2,17 +2,13 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP07 : Hateoas
+## TP07 : Outputs
 
 ```
 git checkout tp07
 ```
 
-- contrôle des données entrantes (inputs)
-- installation du module NPM Validator (https://github.com/validatorjs/validator.js)
-- installation du module NPM body-parser (https://github.com/expressjs/body-parser)
-- utilisation d'un middleware pour valider les données entrantes des requêtes PUT et POST
-
+- autodocumentation avec Hateoas
 
 ### Commandes
 
