@@ -2,13 +2,13 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP08 : Database
+## TP07 : Outputs
 
 ```
-git checkout tp08
+git checkout tp07
 ```
-- création d'un service Docker MariaDB
-- création d'un service Docker Adminer
+- gestion des statuts des réponses http
+- autodocumentation avec Hateoas
 
 ### Commandes
 
