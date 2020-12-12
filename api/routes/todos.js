@@ -10,6 +10,26 @@ const hateoas = require("../utils/hateoas");
 
 router.use(validate_the_todo);
 
+router.put("/", (req,res,next)=>{
+    res.sendStatus(405);//method not allowed
+});
+
+router.patch("/", (req,res,next)=>{
+    res.sendStatus(405);//method not allowed
+});
+
+router.patch("/:id", (req,res,next)=>{
+    res.sendStatus(405);//method not allowed
+});
+
+router.delete("/", (req,res,next)=>{
+    res.sendStatus(405);//method not allowed
+});
+
+router.post("/:id", (req,res,next)=>{
+    res.sendStatus(405);//method not allowed
+});
+
 router.get("/", (req, res,next) => {
 
     res.status(200).json(
@@ -50,7 +70,7 @@ router.post("/", (req, res, next) => {
 
     const new_url = `${req.originalUrl}/${new_id}`;
 
-    res.status(201).json({data:res.the_todo,links:hateoas(req,list=true, self=true,url=new_url)});
+    res.location(new_url).status(201).json({data:res.the_todo,links:hateoas(req,list=true, self=true,url=new_url)});
 });
 
 router.delete("/:id", find_the_todo, (req, res, next) => {
