@@ -7,12 +7,10 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 ```
 git checkout tp06
 ```
-
-- contrôle des données entrantes (inputs)
-- installation du module NPM Validator (https://github.com/validatorjs/validator.js)
-- installation du module NPM body-parser (https://github.com/expressjs/body-parser)
-- utilisation d'un middleware pour valider les données entrantes des requêtes PUT et POST
-
+- utilisation de middleware pour gérer la validation des données entrantes
+- utilisation de middleware pour automatiser la récupération de données (PUT, DELETE, GET)
+- validation des données entrantes
+- gestion des méthodes http autorisées
 
 ### Commandes
 

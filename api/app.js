@@ -10,7 +10,6 @@ app.use(
     })
 );
 
-const error_handler = require("./middlewares/error_handler");
 
 const logger = require("./middlewares/logger");
 app.use(logger);//must be placed before all routes
@@ -21,6 +20,7 @@ app.use('/',index_routes);
 const todos_routes = require("./routes/todos");
 app.use('/todos',todos_routes);
 
+const error_handler = require("./middlewares/error_handler");
 app.use(error_handler);//must be placed after all routes
 
 app.listen(port, () => {
