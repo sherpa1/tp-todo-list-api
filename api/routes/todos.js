@@ -126,7 +126,7 @@ router.get("/:id", (req,res)=>{
 
 });
 
-router.put("/:id", (req,res,next,todo)=>{
+router.put("/:id", (req,res,next)=>{
 
     const {id} = req.params;
 
