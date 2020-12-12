@@ -9,6 +9,11 @@ git checkout tp08
 ```
 - création d'un service Docker MariaDB
 - création d'un service Docker Adminer
+- utilisation de variables d'environnement
+- installation du module npm mysql
+- asynchronisme (async / await)
+- installation du module npm faker (https://github.com/marak/Faker.js/)
+- remplissage de la base de données avec des données fake
 
 ### Commandes
 

@@ -1,5 +1,3 @@
-const todos = require("../../data/todos");
-
 const find_the_todo = (req,res,next)=>{
 
     const { id } = req.params;

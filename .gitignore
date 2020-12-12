@@ -7,6 +7,5 @@ api/logs
 api/yarn-debug.log*
 api/yarn-error.log*
 api/.env
-api/.env.dev
-api/.env.prod
 api/.cache
+mariadb_data/

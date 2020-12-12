@@ -9,4 +9,22 @@ services:
     volumes:
       - ./api:/usr/src/api
     working_dir: /usr/src/api
+    env_file:
+      - ./api/.env
     command: npm run dev
+    links:
+      - tp.todolist.db
+  tp.todolist.db:
+    container_name: tp.todolist.db
+    image: mariadb
+    env_file:
+      - ./mariadb/.env
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
+  tp.todolist.adminer:
+    container_name: tp.todolist.adminer
+    image: adminer
+    ports:
+      - 9090:8080
+    links:
+      - tp.todolist.db

@@ -1,12 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-const todos = require("../data/todos");
-
 const validate_the_todo = require("../middlewares/todo/validate_the_todo");
 const find_the_todo = require("../middlewares/todo/find_the_todo");
 
 const hateoas = require("../utils/hateoas");
+
+const { LOCAL_PORT, DIST_PORT, HOST } = require("../config/env");
+const DBClient = require('../utils/DB/DBClient');
+const Todo = require('../models/Todo');
+
+let todos;
+
+let all_items, one_item;
+
+const table = 'todos';
+const base_url = `${HOST}:${DIST_PORT}/${table}`;
 
 router.use(validate_the_todo);
 
@@ -30,7 +39,21 @@ router.post("/:id", (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
-router.get("/", (req, res,next) => {
+router.get("/", async (req, res,next) => {
+
+    // try {
+    //     const pop = await Todo.populate();
+    // } catch (error) {
+    //     console.error(error);
+    //     return next({status:500,message:"DB Error"});
+    // }
+
+    try {
+        todos = await Todo.all();
+    } catch (error) {
+        console.error(error);
+        return next({status:500,message:"DB Error"});
+    }
 
     res.status(200).json(
         {
