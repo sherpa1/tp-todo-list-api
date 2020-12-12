@@ -12,7 +12,8 @@ Chaque étape de TP correspond à une branche git (TP01 = tp01, TP02 = tp02...).
 - TP04 : CRUD Routes
 - TP05 : Middlewares
 - TP06 : Inputs
-- TP07 : Hateoas
+- TP07 : Outputs
+- TP08 : Database
 
 ## Crédits
 
