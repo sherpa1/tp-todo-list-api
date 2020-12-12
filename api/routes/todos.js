@@ -6,8 +6,6 @@ const todos = require("../data/todos");
 const validate_the_todo = require("../middlewares/todo/validate_the_todo");
 const find_the_todo = require("../middlewares/todo/find_the_todo");
 
-const hateoas = require("../utils/hateoas");
-
 router.use(validate_the_todo);
 
 router.put("/", (req,res,next)=>{
