@@ -2,18 +2,12 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-## TP08 : Database
+## TP09 : Authentification
 
 ```
-git checkout tp08
+git checkout tp09
 ```
-- création d'un service Docker MariaDB
-- création d'un service Docker Adminer
-- utilisation de variables d'environnement
-- installation du module npm mysql
-- asynchronisme (async / await)
-- installation du module npm faker (https://github.com/marak/Faker.js/)
-- remplissage de la base de données avec des données fake
+
 - création de comptes utilisateurs avec mot de passe crypté par Bcrypt
 
 ### Commandes
