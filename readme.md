@@ -4,7 +4,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 
 ## Sommaire
 
-Chaque étape de TP correspond à une branche git (TP01 = tp01, TP02 = tp02...).
+Chaque étape de TP correspond à une branche git dédiée (ex : TP01 = tp01, TP02 = tp02...).
 
 - TP01 : Hello, World!
 - TP02 : Docker Compose + Nodemon
@@ -21,6 +21,7 @@ Chaque étape de TP correspond à une branche git (TP01 = tp01, TP02 = tp02...).
 - pagination
 - documentation avec Swagger
 - sécurisation
+- Ngrok
 
 ## Crédits
 
