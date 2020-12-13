@@ -1,6 +1,5 @@
 const DBClient = require("../utils/DB/DBClient");
 const faker = require('faker');
-const db = require("../utils/DB/DBConnection");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
