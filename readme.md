@@ -15,6 +15,13 @@ Chaque étape de TP correspond à une branche git (TP01 = tp01, TP02 = tp02...).
 - TP07 : Outputs
 - TP08 : Database
 
+### TODO
+- ressource imbriquées
+- authentification, Token, JWT, Basic Auth, Bearer Auth
+- pagination
+- documentation avec Swagger
+- sécurisation
+
 ## Crédits
 
 Icons made by Freepik from www.flaticon.com
