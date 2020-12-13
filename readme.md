@@ -14,6 +14,7 @@ git checkout tp08
 - asynchronisme (async / await)
 - installation du module npm faker (https://github.com/marak/Faker.js/)
 - remplissage de la base de données avec des données fake
+- création de comptes utilisateurs avec mot de passe crypté par Bcrypt
 
 ### Commandes
 

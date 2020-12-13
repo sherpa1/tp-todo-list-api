@@ -19,23 +19,23 @@ const base_url = `${HOST}:${DIST_PORT}/${table}`;
 
 router.use(validate_the_todo);
 
-router.put("/", (req,res,next)=>{
+router.put("/", async (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
-router.patch("/", (req,res,next)=>{
+router.patch("/", async (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
-router.patch("/:id", (req,res,next)=>{
+router.patch("/:id", async (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
-router.delete("/", (req,res,next)=>{
+router.delete("/", async (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
-router.post("/:id", (req,res,next)=>{
+router.post("/:id", async (req,res,next)=>{
     res.sendStatus(405);//method not allowed
 });
 
@@ -62,7 +62,17 @@ router.get("/", async (req, res,next) => {
         });
 });
 
-router.get("/:id", find_the_todo, (req, res,next) => {
+router.get("/:id", find_the_todo, async (req, res,next) => {
+
+    try {
+        one_item = await DBClient.one(`SELECT * FROM ${table} WHERE id=${req.params.id}`);
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    if (one_item == undefined)
+        return res.status(404).location(req.path).json({ message: "Not Found" });
+
 
     res.status(200).json(
         {
@@ -72,7 +82,7 @@ router.get("/:id", find_the_todo, (req, res,next) => {
 
 });
 
-router.put("/:id", find_the_todo, (req, res, next) => {
+router.put("/:id", find_the_todo, async (req, res, next) => {
 
     res.the_todo.title = "Updated todo title";
     res.the_todo.content= "Updated todo content";
@@ -86,7 +96,7 @@ router.put("/:id", find_the_todo, (req, res, next) => {
 
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
     todos.push(res.the_todo);
 
     const new_id = 6;
@@ -96,7 +106,7 @@ router.post("/", (req, res, next) => {
     res.location(new_url).status(201).json({data:res.the_todo,links:hateoas(req,list=true, self=true,url=new_url)});
 });
 
-router.delete("/:id", find_the_todo, (req, res, next) => {
+router.delete("/:id", find_the_todo, async (req, res, next) => {
 
     if(res.the_todo==undefined)
     return next({status:404,message:`Todo with id ${req.params.id} does not exist`});

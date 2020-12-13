@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.all('/', (req, res) => {
+router.all('/', async (req, res, next) => {
     res.json(
         {
             message:"Welcome to the Todo List API", 
