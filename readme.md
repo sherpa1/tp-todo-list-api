@@ -24,6 +24,16 @@ git checkout tp08
 curl localhost:3000
 ```
 
+## Ngrok
+
+Exposition de l'API locale (port 3000) sur internet pour accès distant (ex: depuis un client mobile, un client web distant...).
+
+https://ngrok.com/
+
+```
+ngrok http 3000
+```
+
 ## Docker Compose
 
 - Se placer à la racine du projet

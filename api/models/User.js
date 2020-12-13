@@ -13,6 +13,25 @@ class User extends DBClient {
         super();
     }
 
+    static async count(options = {}) {
+       
+        User.query = `SELECT COUNT(${User.table}.id) as count FROM ${User.table}`;
+        
+        if (options.conditions) {
+            User.query += ` ${options.conditions}`;
+        }
+
+        console.log(User.query);
+
+        try {
+            const result = await super.one(User.query);
+            return result.count;
+        } catch (error) {
+            throw error;
+        }
+
+    }
+
     static async all(options = {}) {
 
         let fields = '*' || options.fields;
@@ -83,8 +102,8 @@ class User extends DBClient {
         }
 
         try {
-            const result = await super.query(`INSERT INTO users (email, password, firstname, lastname, created_at) VALUES ('${email}', '${hash}', '${firstname}', '${lastname}', NOW())`);
-            return "DB populated with success";
+            await super.query(`INSERT INTO ${User.table} (email, password, firstname, lastname, created_at) VALUES ('${email}', '${hash}', '${firstname}', '${lastname}', NOW())`);
+            return `Table "${User.table}" populated with success`;
         } catch (error) {
             console.error(error);
             throw error;

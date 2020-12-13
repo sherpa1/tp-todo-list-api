@@ -63,15 +63,9 @@ router.get("/", async (req, res,next) => {
 });
 
 router.get("/:id", find_the_todo, async (req, res,next) => {
-
-    try {
-        one_item = await DBClient.one(`SELECT * FROM ${table} WHERE id=${req.params.id}`);
-    } catch (error) {
-        throw new Error(error);
-    }
-
-    if (one_item == undefined)
-        return res.status(404).location(req.path).json({ message: "Not Found" });
+    
+    if (res.the_todo == undefined)
+        return res.status(404).json({ status: 404, message: `Todo with id ${id} does not exist` });
 
 
     res.status(200).json(

@@ -6,7 +6,7 @@ const hateoas = (req,self=false,list=false,url=null)=>{
     if(self){
         links.push(                {
             rel: 'list',
-            href: `${HOST}/${req.baseUrl}`,
+            href: HOST+req.baseUrl,
             type: 'GET'
         });
     }
@@ -18,7 +18,7 @@ const hateoas = (req,self=false,list=false,url=null)=>{
         links.push(
             {
                 rel: 'self',
-                href: `${HOST}/${url_end}`,
+                href: HOST+url_end,
                 type: "GET"
             },
         );

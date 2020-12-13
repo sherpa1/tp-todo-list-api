@@ -1,10 +1,8 @@
 const validator = require('validator');
+const {to_mysql_datetime} = require('../../utils/DB/MySQLDatetime');
 const validate_the_todo = (req, res, next) => {
 
     Date.prototype.yyyymmdd = function () {
-        const mm = this.getMonth() + 1; // getMonth() is zero-based
-        const dd = this.getDate();
-
         return [this.getFullYear(),
         (mm > 9 ? '' : '0') + mm,
         (dd > 9 ? '' : '0') + dd
@@ -28,6 +26,10 @@ const validate_the_todo = (req, res, next) => {
             if (!validator.isAfter(res.the_todo.deadline)) {
                 const date = new Date();
                 return next({ status: 400, message: `todo deadline should be after ${date.yyyymmdd()}, ${res.the_todo.deadline} given` });
+            }else{
+                const mysql_datetime = to_mysql_datetime(res.the_todo.deadline);//format JS Datetime to MySQL Datetime
+
+                res.the_todo.deadline = mysql_datetime;
             }
         }
 

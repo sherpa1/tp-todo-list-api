@@ -1,9 +1,6 @@
 const DBClient = require("../utils/DB/DBClient");
-const faker = require('faker');
-const db = require("../utils/DB/DBConnection");
-const bcrypt = require("bcryptjs");
 const User = require("./User");
-const saltRounds = 10;
+const faker = require('faker');
 
 class Todo extends DBClient {
 
@@ -35,6 +32,27 @@ class Todo extends DBClient {
 
     }
 
+    static async count(options = {}) {
+       
+        Todo.query = `SELECT COUNT(${Todo.table}.id) as count FROM ${Todo.table}`;
+        
+        if (options.conditions) {
+            Todo.query += ` ${options.conditions}`;
+        }
+
+        console.log(Todo.query);
+
+        try {
+            const result = await super.one(Todo.query);
+            return result.count;
+        } catch (error) {
+            throw error;
+        }
+
+    }
+
+
+
     static async one(options = {}) {
 
         let fields = '*' || options.fields;
@@ -65,11 +83,11 @@ class Todo extends DBClient {
         let a_user;
 
         try {
-            a_user = await User.one(`SELECT * users LIMIT 1`);
+            a_user = await User.one(`SELECT * ${Todo.table} LIMIT 1`);
             
             if(a_user==undefined){
                 await User.populate();
-                a_user = await User.one(`SELECT * users LIMIT 1`);
+                a_user = await User.one(`SELECT * ${Todo.table} LIMIT 1`);
             }
             
             const title = faker.lorem.sentence();
@@ -87,7 +105,7 @@ class Todo extends DBClient {
                 throw error;
             }
 
-            return "DB populated with success";
+            return `Table "${Todo.table}" populated with success`;
 
 
         } catch (error) {
