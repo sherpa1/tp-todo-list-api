@@ -19,6 +19,8 @@ Se placer à la racine du dossier api
 cd ./api
 ```
 
+Démarrer le serveur Node.js
+
 ```
 npm start
 ```
