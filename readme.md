@@ -8,6 +8,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 git checkout tp04
 ```
 
+- localisation des données dans un fichier externe ./api/data/todos.js
 - implémentation des actions CRUD sur la ressource Todo
 
 ### Commandes
