@@ -1,0 +1,33 @@
+{
+  "name": "auth-api",
+  "version": "1.0.0",
+  "description": "Enseignement du développement d'API avec Node.js et Docker",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sherpa1/tp-todo-list-api.git"
+  },
+  "author": "Alexandre Leroux <alex@sherpa.one> (https://sherpa.one)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/sherpa1/tp-todo-list-api/issues"
+  },
+  "homepage": "https://github.com/sherpa1/tp-todo-list-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "validator": "^13.5.2"
+  }
+}
