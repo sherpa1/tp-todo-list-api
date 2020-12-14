@@ -2,22 +2,13 @@
 
 Une simple API REST exposant des services autour du concept de Todo List, réalisée dans le cadre de l'enseignement du développement d'API REST avec Node.js, implémentées au sein d'architectures Micro Services mises en place avec Docker et consommées par tous types de clients (Web, Mobile...).
 
-<<<<<<< HEAD
 ## TP09 : Sécurité
-=======
-## TP09 : Authentification **!!!!!!!!!!!!!** Work in progress **!!!!!!!!!!!!!!!!!**
->>>>>>> c75a889a2960a03b14cd0e297d690eefdfe9e894
 
 ```
 git checkout tp09
 ```
-<<<<<<< HEAD
 - implémentation des bonnes pratiques de sécurité associées à Express.js : https://expressjs.com/fr/advanced/best-practice-security.html
 - gestion de Cors
-=======
-
-- création de comptes utilisateurs avec mot de passe crypté par Bcrypt
->>>>>>> c75a889a2960a03b14cd0e297d690eefdfe9e894
 
 ### Commandes
 
