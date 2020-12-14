@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const todos = require("./api/data/todos");
+const todos = require("../data/todos");
 
 let a_todo;
 
