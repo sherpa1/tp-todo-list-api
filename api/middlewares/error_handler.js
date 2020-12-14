@@ -5,6 +5,8 @@ const error_handler = (err,req,res,next)=>{
     if(status==undefined) status = 400;
     if(message==undefined) message = "";
 
+    console.error(err);
+
     res.status(status).json({status,message});
 
 }

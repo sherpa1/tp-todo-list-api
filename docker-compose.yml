@@ -21,31 +21,10 @@ services:
       - ./mariadb/.env
     volumes:
       - ./mariadb_data:/var/lib/mysql
-  tp.todolist.auth.api:
-    container_name: tp.todolist.auth.api
-    image: node
-    ports:
-      - "4000:3000"
-    volumes:
-      - ./auth_api:/usr/src/api
-    working_dir: /usr/src/api
-    env_file:
-      - ./auth_api/.env
-    command: npm start
-    links:
-      - tp.todolist.auth.db
-  tp.todolist.auth.db:
-    container_name: tp.todolist.auth.db
-    image: mariadb
-    env_file:
-      - ./auth_mariadb/.env
-    volumes:
-      - ./auth_mariadb_data:/var/lib/mysql
   tp.todolist.adminer:
     container_name: tp.todolist.adminer
     image: adminer
     ports:
       - 9090:8080
     links:
-      - tp.todolist.auth.db
       - tp.todolist.db

@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const {HOST} = require("../config/env");
 
 router.all('/', async (req, res, next) => {
+
+    console.log(`App seen ${req.session.views['/']} times`);
+
     res.json(
         {
             message:"Welcome to the Todo List API", 
@@ -10,7 +14,7 @@ router.all('/', async (req, res, next) => {
                             {
                                 ressource:"Todo",
                                 collection:"todos",
-                                uri:"http://localhost:3000/todos"
+                                uri:`${HOST}/todos`
                             },
                         ]
         }
