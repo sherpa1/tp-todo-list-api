@@ -8,7 +8,8 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 git checkout tp05
 ```
 
-- implémentation des actions CRUD sur la ressource Todo
+- utilisation d'un middleware pour écrire des messages de logs à chaque requêtre HTTP reçue ./api/middlewares/logger.js
+- utilisation d'un middleware pour gérer de façon uniforme les messages d'erreur de l'API ./api/middlewares/error_handler.js
 
 ### Commandes
 
