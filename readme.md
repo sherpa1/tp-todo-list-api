@@ -8,7 +8,7 @@ Une simple API REST exposant des services autour du concept de Todo List, réali
 git checkout tp03
 ```
 
-- organisation des Routes dans des fichiers distincts
+- organisation des Routes de l'API dans des fichiers distincts au sein du dossier ./api/routes
 
 ### Commandes
 
