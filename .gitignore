@@ -10,3 +10,4 @@ api/.env
 api/.env.dev
 api/.env.prod
 api/.cache
+.vscode/
