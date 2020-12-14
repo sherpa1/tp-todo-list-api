@@ -1,2 +1,2 @@
 console.log("Hello, World!");
-console.log("Check Nodemon !");
+console.log("Nodemon works !");
